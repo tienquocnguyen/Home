@@ -1,0 +1,32 @@
+{
+  "name": "home",
+  "version": "1.0.0",
+  "description": "Web Application to help the homeless",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "front_end": "npm start --prefix front_end",
+    "dev": "concurrently \"npm run server\" \"npm run front_end\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tienquocnguyen/Home.git"
+  },
+  "author": "Bytes of the Round Table",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tienquocnguyen/Home/issues"
+  },
+  "homepage": "https://github.com/tienquocnguyen/Home#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  }
+}
