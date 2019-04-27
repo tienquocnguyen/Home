@@ -120,7 +120,6 @@ class Login extends React.Component {
 	  			//<CircularProgress className={classes.progress} />
 
 	  			//:
-
 			    <main className={classes.main}>
 			      <CssBaseline />
 			      <Paper className={classes.paper}>
@@ -183,7 +182,7 @@ class Login extends React.Component {
 			            color="primary"
 			            className={classes.submit}
 			            component={Link}
-			            to='/restaurant_signup/'
+			            to='/user_signup/'
 			          >
 			            User Signup
 			          </Button>
