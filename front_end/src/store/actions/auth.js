@@ -36,20 +36,21 @@ export const logout = () => dispatch => {
 			const userType = userTokenArr[0];
 			const token = userTokenArr[1];
 			console.log(token)
+			dispatch(authLogout())
 			firebase.auth().signOut()
-			.then(res => {
-				localStorage.removeItem('user');
-				localStorage.removeItem('expDate');
-				dispatch(authLogout())
-				resolve(res)
-			})
-			.catch(error => {
-				console.log(error)
-				reject(error)
-			})
+			localStorage.removeItem('user');
+			// .then(res => {
+			// 	localStorage.removeItem('user');
+			// 	localStorage.removeItem('expDate');
+			// 	dispatch(authLogout())
+			// 	resolve(res)
+			// })
+			// .catch(error => {
+			// 	console.log(error)
+			// 	reject(error)
+			// })
 		}
 	})
-	dispatch(authLogout())
 
 }
 
