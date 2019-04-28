@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DonatedNumber from './donatedNumber';
 import BankStatements from '../components/BankStatements';
 import CardPurchase from '../components/CardPurchase';
+import firebase from '../Firebase'
 
 export class donate extends Component {
   
@@ -23,14 +24,21 @@ export class donate extends Component {
       ]
     };
   }
+  getPaymentInformation(){
+    var user = firebase.auth().currentUser;
+    var docRef = firebase.firestore().collection("users").doc(user.email);
+    docRef.get().then(function(doc) {
+      if (doc.exists) {
+        return (doc.data()["payments"]);
+      }
+    })
+  }
 
   calculateRound = (charge) => {
     return Math.round(charge)
   }
   render() {
     return (
-
-
         <div>
             <h1 >Donations</h1>
             <DonatedNumber />
@@ -43,4 +51,4 @@ export class donate extends Component {
   }
 }
 
-export default donate
+export default donate;

@@ -11,6 +11,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/auth';
+import firebase from '../../Firebase';
+import donate from '../../containers/donate';
 
 const styles = {
   root: {
@@ -26,6 +28,10 @@ const styles = {
 };
 
 class ButtonAppBar extends React.Component {
+  logout(){
+    console.log(donate.getPaymentInformation());
+    firebase.auth().signOut()
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -43,8 +49,8 @@ class ButtonAppBar extends React.Component {
             }
             
             {
-              this.props.isAuthenticated ?
-              <Button color="inherit" onClick={this.props.logout} component={Link} to="/Login/"> Logout</Button>
+              firebase.auth().currentUser ?
+              <Button color="inherit" onClick={this.logout} component={Link} to="/"> Logout</Button>
               :
               <Button color="inherit" component={Link} to="/Login/">Login</Button>
             }

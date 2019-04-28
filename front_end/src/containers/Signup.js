@@ -89,17 +89,11 @@ signup(e){
 	.catch((error) => {
 		console.log(error);
 	});
-	firebase.firestore().collection('users').add({
-		name: this.state.name,
+	firebase.firestore().collection('users').doc(this.state.email.toString()).set({
 		email: this.state.email,
 		status: 0,
 		role: "donator",
-		payments: [
-			{
-				original: 0,
-				difference: 0
-			}
-		],
+		payments: {},
 		percentages: {
 			shelter: 0,
 			food: 0,
@@ -110,7 +104,6 @@ signupHotel(e){
 	e.preventDefault();
 	firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
 	firebase.firestore().collection('users').add({
-		name: this.state.name,
 		email: this.state.email,
 		address: this.state.address,
 		numberOfRooms: 0,
@@ -422,4 +415,4 @@ Signup.propTypes = {
 // 	}
 // }
 
-export default withStyles(styles)(Signup);
+export default (withStyles(styles)(Signup));

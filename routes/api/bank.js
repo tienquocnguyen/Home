@@ -29,14 +29,14 @@ router.get('/chargeByTransactions', async(req,res) => {
             difference = difference * 100;
             sum += difference;
         })
-        let {status} = await stripe.charges.create({
+        let {status} = stripe.charges.create({
           amount: sum,
           currency: "usd",
           description: "Donation by Transactions",
           source: req.body
         })
 
-      res.json({status});
+      res.json({difference});
     })
   }catch (err){
     res.status(500).end();
