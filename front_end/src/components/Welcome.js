@@ -82,7 +82,7 @@ class Welcome extends React.Component {
             variant="outlined"
             color="inherit"
             component={Link}
-            to="/login"
+            to="/donate"
             style={buttonStyle}
           >
             Make a Donation

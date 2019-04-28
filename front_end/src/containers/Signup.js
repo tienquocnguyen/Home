@@ -69,7 +69,9 @@ class Signup extends React.Component {
       showSignup: false,
 			showInitial: true,
 			email: '',
-			password: ''
+			password: '',
+			name: '',
+			address: ''
  };
 
  this.handleChange = this.handleChange.bind(this);
@@ -210,6 +212,10 @@ wrapperHotel = () => {
 			          User Signup
 			        </Typography>
 			        <form className={classes.form} onSubmit={this.submit}>
+							<FormControl margin="normal" required fullWidth>
+			            <InputLabel htmlFor="name">Name</InputLabel>
+			            <Input id="name" name="name" value={this.state.name} autoFocus onChange={this.handleChange} />
+			          </FormControl>
 			          <FormControl margin="normal" required fullWidth>
 			            <InputLabel htmlFor="email">Email</InputLabel>
 			            <Input id="email" name="email" value={this.state.email} autoFocus onChange={this.handleChange} />
@@ -261,9 +267,17 @@ wrapperHotel = () => {
 			          Hotel Signup
 			        </Typography>
 			        <form className={classes.form} onSubmit={this.submit}>
+							<FormControl margin="normal" required fullWidth>
+			            <InputLabel htmlFor="name">Name</InputLabel>
+			            <Input id="name" name="name" value={this.state.name} autoFocus onChange={this.handleChange} />
+			          </FormControl>
 			          <FormControl margin="normal" required fullWidth>
 			            <InputLabel htmlFor="email">Email</InputLabel>
 			            <Input id="email" name="email" value={this.state.email} autoFocus onChange={this.handleChange} />
+			          </FormControl>
+								<FormControl margin="normal" required fullWidth>
+			            <InputLabel htmlFor="address">Address</InputLabel>
+			            <Input id="address" name="address" value={this.state.address} autoFocus onChange={this.handleChange} />
 			          </FormControl>
 			          <FormControl margin="normal" required fullWidth>
 			            <InputLabel htmlFor="password">Password</InputLabel>
