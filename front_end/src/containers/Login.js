@@ -160,6 +160,8 @@ class Login extends Component {
            color="primary"
            className={classes.submit}
            onClick={this.login}
+           component={Link}
+           to='/user_dashboard/'
          >
            Login
          </Button>
