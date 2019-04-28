@@ -19,8 +19,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { blue, grey } from '@material-ui/core/colors';
 
-import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
+import firebase from '../Firebase';
+import { Link } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
 
 
@@ -69,55 +69,93 @@ class Signup extends React.Component {
       showSignup: false,
 			showInitial: true,
 			email: '',
-			password1: ''
+			password: ''
  };
 
+ this.handleChange = this.handleChange.bind(this);
+ this.signup = this.signup.bind(this);
  this.showUserPage = this.showUserPage.bind(this);
  this.showHotelPage = this.showHotelPage.bind(this);
  this.showSignup = this.showSignup.bind(this);
 }
 
- handleChange = param => (event) => {
-    this.setState({
-     [param]: event.target.value
-    })
- }
+ handleChange(e) {
+	this.setState({ [e.target.name]: e.target.value });
+}
 
- handleSubmit = (e) => {
-         e.preventDefault();
-       console.log(this.state);
-       // var location = this.state.street_address + ' ' + this.state.city + ' ' + this.state.state
-       // Axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
-       // 	params:{
-       // 		address:location,
-       // 		key:'AIzaSyCAp9svAAYxNF4P4BXO1-BVQ4lcMCHn09k'
-       // 	}
-       // })
-       // .then(response => {
-       // 	this.setState({
-       // 		lat: response.data.results[0].geometry.location.lat
-       // 	})
-       // 	this.setState({
-       // 		lng: response.data.results[0].geometry.location.lng
-       // 	})
-       // 	console.log(this.state.lat)
-       // 	console.log(this.state.lng)
-             this.props.onAuth(this.state.email, this.state.password1)
-             .then( res =>{
-                     console.log('res here');
-                     console.log(res);
-                      alert('Singup successful! You can login now')
-                      this.props.history.push('/login')
-           }).catch(error => {
-               alert('Please enter correct information')
-               console.log(error)
-           })
-       // }).catch(error => {
-       // 	alert('Please enter correct infromation')
-       // 	console.log('error here')
-       // 	console.log(error)
-       // })
-   }
+signup(e){
+	e.preventDefault();
+	firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+	.catch((error) => {
+		console.log(error);
+	});
+	firebase.firestore().collection('users').add({
+		name: this.state.name,
+		email: this.state.email,
+		status: 0,
+		role: "donator",
+		payments: [
+			{
+				original: 0,
+				difference: 0
+			}
+		],
+		percentages: {
+			shelter: 0,
+			food: 0,
+			clothes: 0,
+	}})
+}
+signupHotel(e){
+	e.preventDefault();
+	firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
+	firebase.firestore().collection('users').add({
+		name: this.state.name,
+		email: this.state.email,
+		address: this.state.address,
+		numberOfRooms: 0,
+		role: "hotel"
+	})
+	.catch((error) => {
+		console.log(error);
+	})
+}
+
+//  handleSubmit = (e) => {
+//          e.preventDefault();
+//        console.log(this.state);
+//        // var location = this.state.street_address + ' ' + this.state.city + ' ' + this.state.state
+//        // Axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
+//        // 	params:{
+//        // 		address:location,
+//        // 		key:'AIzaSyCAp9svAAYxNF4P4BXO1-BVQ4lcMCHn09k'
+//        // 	}
+//        // })
+//        // .then(response => {
+//        // 	this.setState({
+//        // 		lat: response.data.results[0].geometry.location.lat
+//        // 	})
+//        // 	this.setState({
+//        // 		lng: response.data.results[0].geometry.location.lng
+//        // 	})
+//        // 	console.log(this.state.lat)
+//        // 	console.log(this.state.lng)
+//              this.props.onAuth(this.state.email, this.state.password1)
+//              .then( res =>{
+//                      console.log('res here');
+//                      console.log(res);
+//                       alert('Singup successful! You can login now')
+//                       this.props.history.push('/login')
+//            }).catch(error => {
+//                alert('Please enter correct information')
+//                console.log(error)
+//            })
+//        // }).catch(error => {
+//        // 	alert('Please enter correct infromation')
+//        // 	console.log('error here')
+//        // 	console.log(error)
+//        // })
+//    }
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -171,21 +209,22 @@ wrapperHotel = () => {
 			        <Typography component="h1" variant="h5">
 			          User Signup
 			        </Typography>
-			        <form className={classes.form} onSubmit={this.handleSubmit}>
+			        <form className={classes.form} onSubmit={this.submit}>
 			          <FormControl margin="normal" required fullWidth>
 			            <InputLabel htmlFor="email">Email</InputLabel>
-			            <Input id="email" name="email" value={this.state.email} autoFocus onChange={this.handleChange('email')} />
+			            <Input id="email" name="email" value={this.state.email} autoFocus onChange={this.handleChange} />
 			          </FormControl>
 			          <FormControl margin="normal" required fullWidth>
-			            <InputLabel htmlFor="password1">Password</InputLabel>
-			            <Input name="password1" type="password" id="password1" value={this.state.password1} onChange={this.handleChange('password1')} />
+			            <InputLabel htmlFor="password">Password</InputLabel>
+			            <Input name="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} />
 			          </FormControl>
 			          <Button
-			            type="submit"
+			            //type="submit"
 			            fullWidth
 			            variant="contained"
 			            color="primary"
-			            className={classes.submit}
+									className={classes.submit}
+									onClick = {this.signup}
 			          >
 			            Signup
 			          </Button>
@@ -204,7 +243,7 @@ wrapperHotel = () => {
 			            variant="contained"
 			            color="primary"
 			            className={classes.submit}
-                        onClick = {this.wrapperUser}
+                  onClick = {this.wrapperUser}
 			          >
 			            Back
 			          </Button>
@@ -221,21 +260,22 @@ wrapperHotel = () => {
 			        <Typography component="h1" variant="h5">
 			          Hotel Signup
 			        </Typography>
-			        <form className={classes.form} onSubmit={this.handleSubmit}>
+			        <form className={classes.form} onSubmit={this.submit}>
 			          <FormControl margin="normal" required fullWidth>
 			            <InputLabel htmlFor="email">Email</InputLabel>
-			            <Input id="email" name="email" value={this.state.email} autoFocus onChange={this.handleChange('email')} />
+			            <Input id="email" name="email" value={this.state.email} autoFocus onChange={this.handleChange} />
 			          </FormControl>
 			          <FormControl margin="normal" required fullWidth>
-			            <InputLabel htmlFor="password1">Password</InputLabel>
-			            <Input name="password1" type="password" id="password1" value={this.state.password1} onChange={this.handleChange('password1')} />
+			            <InputLabel htmlFor="password">Password</InputLabel>
+			            <Input name="password" type="password" id="password" value={this.state.password} onChange={this.handleChange} />
 			          </FormControl>
 			          <Button
-			            type="submit"
+			            //type="submit"
 			            fullWidth
 			            variant="contained"
 			            color="primary"
-			            className={classes.submit}
+									className={classes.submit}
+									onClick = {this.signupHotel}
 			          >
 			            Signup
 			          </Button>
@@ -254,7 +294,7 @@ wrapperHotel = () => {
 			            variant="contained"
 			            color="primary"
 			            className={classes.submit}
-                        onClick = {this.wrapperHotel}
+                  onClick = {this.wrapperHotel}
 			          >
 			            Back
 			          </Button>
@@ -369,17 +409,17 @@ Signup.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => {
-	return {
-		//loading: state.loading,
-		//error: state.error
-	}
-}
+// const mapStateToProps = (state) => {
+// 	return {
+// 		//loading: state.loading,
+// 		//error: state.error
+// 	}
+// }
 
-const mapDispatchProps = dispatch => {
-	return {
-		onAuth: (email, password1) => dispatch(actions.authSignupRest(email, password1))
-	}
-}
+// const mapDispatchProps = dispatch => {
+// 	return {
+// 		onAuth: (email, password1) => dispatch(actions.authSignupRest(email, password1))
+// 	}
+// }
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchProps)(Signup));
+export default withStyles(styles)(Signup);

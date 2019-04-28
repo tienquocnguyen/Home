@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import firebase from '../Firebase';
 
+import { Link } from 'react-router-dom';
+
 const styles = theme => ({
   main: {
     width: 'auto',
@@ -53,7 +55,8 @@ class Login extends Component {
     this.signup = this.signup.bind(this);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      address: ''
     };
   }
 
@@ -63,7 +66,7 @@ class Login extends Component {
 
   login(e) {
     e.preventDefault();
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{console.log('success')
     }).catch((error) => {
         console.log(error);
       });
@@ -165,7 +168,8 @@ class Login extends Component {
            variant="contained"
            color="primary"
            className={classes.submit}
-           onClick={this.signup}
+           component={Link}
+           to='/Signup/'
          >
            Signup
          </Button>

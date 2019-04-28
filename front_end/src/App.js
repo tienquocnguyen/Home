@@ -6,10 +6,15 @@ import { BrowserRouter as Router } from "react-router-dom";
 import firebase from './Firebase';
 import BaseRouter from "./routes";
 import ButtonAppBar from "./components/common/navbar";
+//import {DB_CONFIG} from './Config'
 
 class App extends Component {
   constructor() {
     super();
+
+    // this.app = firebase.initializeApp(DB_CONFIG);
+    // this.database = this.app.database().ref().child('users');
+
     this.state = ({
       user: null,
     });
@@ -49,7 +54,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.token !== null
+    isAuthenticated: state.user !== null
   };
 };
 
