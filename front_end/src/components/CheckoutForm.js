@@ -25,6 +25,19 @@ class CheckoutForm extends Component {
     if (response.ok) console.log("Purchase Complete!")
   }
 
+
+  async transactionSubmit(ev) {
+    let {token} = await this.props.stripe.createToken({name: "Name"});
+    let response = await fetch("/api/bank/charge", {
+        method: "POST",
+        headers:{"Content-Type": "text/plain"},
+        body: token.id
+    });
+
+    if (response.ok) console.log("Purchase Complete!")
+  }
+
+
   render() {
     if (this.state.complete) return <h1>Purchase Complete</h1>;
 
@@ -34,6 +47,7 @@ class CheckoutForm extends Component {
         <CardElement />
         <input type = "number" min="0.01" id = "donationAmount" placeholder = "Enter dollar amount"></input>
         <button onClick={this.submit}>Send</button>
+        <button onClick = {this.transactionSubmit}>Send</button>
       </div>
     );
   }
