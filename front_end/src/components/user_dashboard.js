@@ -17,19 +17,31 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid';
-import { blue } from '@material-ui/core/colors';
+import { blue, grey } from '@material-ui/core/colors';
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   card: {
     width: 'auto',
-    height: 'auto',
+    height: '350px',
     display: 'block', // Fix IE 11 issue.
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: theme.spacing.unit * 8,
+    marginTop: theme.spacing.unit * 7,
     padding: theme.spacing.unit * 2,
     textAlign: 'center',
-    color: theme.palette.text.secondary,
+    backgroundColor: '#F5F7FA',
+  },
+  card2:{
+    width: 'auto',
+    height: '350px',
+    display: 'block', // Fix IE 11 issue.
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    backgroundColor: '#F5F7FA',
   },
   media: {
     height: 0,
@@ -54,6 +66,9 @@ const styles = theme => ({
   root: {
       flexGrow: 1,
   },
+  container: {
+      backgroundColor: 'grey'
+  }
 });
 
 
@@ -68,35 +83,38 @@ class UserDashboard extends React.Component {
     const { classes } = this.props;
 
     return (
+    <div>
     <Grid container spacing = {24}>
     <Grid item xs>
       <Card className={classes.card}>
         <CardHeader
-          avatar={
-            <Avatar aria-label="Bank" className={classes.avatar}>
-              B
-            </Avatar>
-          }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title="Auto-Donation Bank Statement"
+        //   avatar={
+        //     <Avatar aria-label="Bank" className={classes.avatar}>
+        //       B
+        //     </Avatar>
+        //   }
+        //   action={
+        //     <IconButton>
+        //       <MoreVertIcon />
+        //     </IconButton>
+        //   }
+          title="Donation Bank Statement"
           //subheader="Wells Fargo"
         />
         <CardMedia
           className={classes.media}
           image = {require("../Wells_Fargo.jpg")}
           title="Wells Fargo"
+          component={Link}
+          to='/donate'
         />
         <CardContent>
-          <Typography component="p">
+          <Typography component='p'>
             View your donation total from your rounded transactions! 
           </Typography>
         </CardContent>
-        <CardActions className={classes.actions} disableActionSpacing>
-          {/* <IconButton
+        {/* <CardActions className={classes.actions} disableActionSpacing>
+          <IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded,
             })}
@@ -105,8 +123,8 @@ class UserDashboard extends React.Component {
             aria-label="Show more"
           >
             <ExpandMoreIcon />
-          </IconButton> */}
-        </CardActions>
+          </IconButton>
+        </CardActions> */}
         {/* <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>Method:</Typography>
@@ -139,16 +157,16 @@ class UserDashboard extends React.Component {
       <Grid item xs>
       <Card className = {classes.card}>
       <CardHeader
-          avatar={
-            <Avatar aria-label="Donation" className={classes.avatar}>
-              D
-            </Avatar>
-          }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
+        //   avatar={
+        //     <Avatar aria-label="Donation" className={classes.avatar}>
+        //       D
+        //     </Avatar>
+        //   }
+        //   action={
+        //     <IconButton>
+        //       <MoreVertIcon />
+        //     </IconButton>
+        //   }
           title="Read Their Stories"
           //subheader="Local"
         />
@@ -159,7 +177,7 @@ class UserDashboard extends React.Component {
         />
         <CardContent>
           <Typography component="p">
-            Learn about homeless individuals and families in your area and you can help
+            Learn about homeless individuals and families in your area you can help
           </Typography>
         </CardContent>
         {/* <CardActions className={classes.actions} disableActionSpacing>
@@ -169,16 +187,16 @@ class UserDashboard extends React.Component {
       <Grid item xs>
       <Card className = {classes.card}>
       <CardHeader
-          avatar={
-            <Avatar aria-label="Map" className={classes.avatar}>
-              M
-            </Avatar>
-          }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
+        //   avatar={
+        //     <Avatar aria-label="Map" className={classes.avatar}>
+        //       M
+        //     </Avatar>
+        //   }
+        //   action={
+        //     <IconButton>
+        //       <MoreVertIcon />
+        //     </IconButton>
+        //   }
           title="Map of Donation Boxes"
           //subheader="Near your current location"
         />
@@ -196,19 +214,21 @@ class UserDashboard extends React.Component {
         </CardActions> */}
       </Card>
       </Grid>
-      <Grid item xs>
-      <Card className = {classes.card}>
+    </Grid>
+    <Grid container spacing = {24}>
+    <Grid item xs>
+      <Card className = {classes.card2}>
       <CardHeader
-          avatar={
-            <Avatar aria-label="Shop" className={classes.avatar}>
-              S
-            </Avatar>
-          }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
+        //   avatar={
+        //     <Avatar aria-label="Shop" className={classes.avatar}>
+        //       S
+        //     </Avatar>
+        //   }
+        //   action={
+        //     <IconButton>
+        //       <MoreVertIcon />
+        //     </IconButton>
+        //   }
           title="Shop"
           //subheader="Buy essential supplies for homeless care packages"
         />
@@ -226,7 +246,68 @@ class UserDashboard extends React.Component {
         </CardActions> */}
       </Card>
       </Grid>
+    <Grid item xs>
+    <Card className = {classes.card2}>
+      <CardHeader
+        //   avatar={
+        //     <Avatar aria-label="Map" className={classes.avatar}>
+        //       M
+        //     </Avatar>
+        //   }
+        //   action={
+        //     <IconButton>
+        //       <MoreVertIcon />
+        //     </IconButton>
+        //   }
+          title="Hotel"
+          //subheader="Near your current location"
+        />
+        <CardMedia
+          className={classes.media}
+          image = {require("../Hotel.jpg")}
+          title="Hotel"
+        />
+        <CardContent>
+          <Typography component="p">
+            Post available rooms for the night if you're a hotel
+          </Typography>
+        </CardContent>
+        {/* <CardActions className={classes.actions} disableActionSpacing>
+        </CardActions> */}
+      </Card>
     </Grid>
+    <Grid item xs>
+      <Card className = {classes.card2}>
+      <CardHeader
+        //   avatar={
+        //     <Avatar aria-label="Donation" className={classes.avatar}>
+        //       D
+        //     </Avatar>
+        //   }
+        //   action={
+        //     <IconButton>
+        //       <MoreVertIcon />
+        //     </IconButton>
+        //   }
+          title="Submit a Location"
+          //subheader="Local"
+        />
+        <CardMedia
+          className={classes.media}
+          image = {require("../SoupKitchen.jpg")}
+          title="Soup Kitchen"
+        />
+        <CardContent>
+          <Typography component="p">
+            Submit a donation box or shelter location for the map
+          </Typography>
+        </CardContent>
+        {/* <CardActions className={classes.actions} disableActionSpacing>
+        </CardActions> */}
+      </Card>
+      </Grid>
+    </Grid>
+    </div>
     );
   }
 }

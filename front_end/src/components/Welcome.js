@@ -20,29 +20,48 @@ const headerStyle = {
   fontFamily: "roboto"
 };
 const paraStyle = {
+  padding: "90px",
   color: "black",
   fontWeight: "normal",
-  fontFamily: "roboto"
+  fontFamily: "roboto",
+  marginBottom: "0px"
 };
 const buttonStyle = {
-  marginTop: "50px",
+  marginTop: "0px",
   fontSize: "20px",
-  padding: "20px",
-  color: "black",
+  padding: "10px",
+  color: "B6D4F9",
   fontWeight: "normal"
 };
+const container = {
+  position: 'relative',
+  align: 'center',
+  color: 'white'
+};
+const centered = {
+  position: 'absolute',
+    top: '50%',
+    left: '50%',
+  // padding: "90px",
+  color: "white",
+  fontSize: "80px",
+  fontWeight: "normal",
+  fontFamily: "roboto",
+  transform: 'translate(-50%, -50%)'
+}
 
 class Welcome extends React.Component {
   render() {
     return (
       <React.Fragment>
-      <div class="image">
+      <div style={container}>
       <img src={imgfood} alt="San Jose Photo" width= '100%' height = '500'/>
+      <div style={centered}>H.O.M.E.</div>
       </div>
       <div className="welcomponent" style={divStyle}>
-        <h1 align="center" style={headerStyle}>
+        {/* <h1 align="center" style={headerStyle}>
           H.O.M.E.
-        </h1>
+        </h1> */}
         <h2 align="center" style={paraStyle}>
           Welcome to H.O.M.E. - Helping Other Members of Earth. <br />
           Signup to be a donator, hotel, or shelter today!
@@ -50,12 +69,23 @@ class Welcome extends React.Component {
         <CardActions style={{ justifyContent: "center" }}>
           <Button
             variant="outlined"
-            color="secondary"
+            color="inherit"
             component={Link}
             to="/login"
             style={buttonStyle}
           >
             Login/Register
+          </Button>
+          </CardActions>
+          <CardActions style={{ justifyContent: "center" }}>
+          <Button
+            variant="outlined"
+            color="inherit"
+            component={Link}
+            to="/login"
+            style={buttonStyle}
+          >
+            Make a Donation
           </Button>
         </CardActions>
       </div>

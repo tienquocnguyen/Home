@@ -35,7 +35,8 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+		padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+		backgroundColor: '#F5F7FA'
   },
   avatar: {
     margin: theme.spacing.unit,
@@ -95,7 +96,7 @@ class RestSignup extends React.Component {
 			   		alert('Singup successful! You can login now')
 			   		this.props.history.push('/login')
 			}).catch(error => {
-				alert('Please enter correct infromation')
+				alert('Please enter correct information')
 				console.log(error)
 			})
 		// }).catch(error => {
@@ -133,7 +134,7 @@ class RestSignup extends React.Component {
 			          <LockOutlinedIcon />
 			        </Avatar>
 			        <Typography component="h1" variant="h5">
-			          General User Signup
+			          User Signup
 			        </Typography>
 			        <form className={classes.form} onSubmit={this.handleSubmit}>
 			          <FormControl margin="normal" required fullWidth>

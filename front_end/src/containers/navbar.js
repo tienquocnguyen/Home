@@ -39,7 +39,7 @@ class ButtonAppBar extends React.Component {
               this.props.isAuthenticated ?
               <Button color="inherit" component={Link} to="/user_dashboard"> Dashboard</Button>
               :
-              <Button color="inherit" component={Link} to="/user_dashboard"></Button>
+              <Button color="inherit" component={Link} to="/user_dashboard"> Dashboard </Button>
             }
             
             {
@@ -48,7 +48,6 @@ class ButtonAppBar extends React.Component {
               :
               <Button color="inherit" component={Link} to="/login/">Login</Button>
             }
-            <Button color="inherit" component={Link} to= "/donate/">Donations</Button>
           </Toolbar>
         </AppBar>
         {this.props.children}
