@@ -10,10 +10,16 @@ class CheckoutForm extends Component {
 
   async submit(ev) {
     let {token} = await this.props.stripe.createToken({name: "Name"});
+    var amount = parseInt(document.getElementById('donationAmount').value);
+    amount = amount * 100;
     let response = await fetch("/api/bank/charge", {
         method: "POST",
-        headers: {"Content-Type": "text/plain"},
-        body: token.id
+        headers: {'Accept': 'application/json',
+        'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          token: token.id,
+          amount: amount
+        })
     });
 
     if (response.ok) console.log("Purchase Complete!")
@@ -26,6 +32,7 @@ class CheckoutForm extends Component {
       <div className="checkout">
         <p>Would you like to complete the purchase?</p>
         <CardElement />
+        <input type = "number" min="0.01" id = "donationAmount" placeholder = "Enter dollar amount"></input>
         <button onClick={this.submit}>Send</button>
       </div>
     );

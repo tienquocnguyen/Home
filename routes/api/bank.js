@@ -7,18 +7,35 @@ router.use(require("body-parser").text());
 router.post('/charge', async (req,res) => {
     try {
         let {status} = await stripe.charges.create({
-          amount: 2000,
+          amount: req.body.amount,
           currency: "usd",
           description: "An example charge",
-          source: req.body
+          source: req.body.token
         });
-    
         res.json({status});
       } catch (err) {
         res.status(500).end();
       }
 });
 
+router.get('/chargeByTransaction', async(req,res) => {
+  try{
+    stripe.balance.retrieve(async(txn_1EU0ZyEvoqFHC1GQuUdIqWcq,
+      transaction) => {
+        var roundUp = Math.roundUp(parseInt(transaction[0]));
+        var difference = roundUp - parseInt(transaction[0]);
+        let {status} = await stripe.charges.create({
+          amount: difference,
+          currency: "usd",
+          description: "An example charge",
+          source: transaction.source
+        })
+      res.json({status});
+    })
+  }catch (err){
+    res.status(500).end();
+  }
+});
 
 
 module.exports = router;
