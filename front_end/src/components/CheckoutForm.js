@@ -12,11 +12,12 @@ class CheckoutForm extends Component {
 
   async submit(e) {
     e.preventDefault();
+    //const {checkoutForm} = this.state;
     let {token} = await this.props.stripe.createToken({name: "Name"});
     let response = await fetch("/api/bank/charge", {
         method: "POST",
         headers: {"Content-Type": "text/plain"},
-        body: token.id,
+        body: token.id
     });
 
     this.setState({amount: ''});
