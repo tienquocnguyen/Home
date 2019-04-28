@@ -2,13 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/auth";
 import "@material-ui/core/";
+import { BrowserRouter as Router } from "react-router-dom";
 import firebase from './Firebase';
-import Home from './Home';
-import Login from './Login';
+import BaseRouter from "./routes";
+import ButtonAppBar from "./components/common/navbar";
+//import {DB_CONFIG} from './Config'
 
 class App extends Component {
   constructor() {
     super();
+
+    // this.app = firebase.initializeApp(DB_CONFIG);
+    // this.database = this.app.database().ref().child('users');
+
     this.state = ({
       user: null,
     });
@@ -33,14 +39,22 @@ class App extends Component {
   //</ButtonAppBar>
   render() {
     return (
-     <div>{this.state.user ? ( <Home/>) : (<Login />)}</div>)
+     //<div>{this.state.user ? ( <Home/>) : (<Login />)}</div>
+     <div>
+        <Router>
+          <ButtonAppBar {...this.props}>
+            <BaseRouter />
+          </ButtonAppBar>
+        </Router>
+      </div>
+      )
 }
 }
 
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.token !== null
+    isAuthenticated: state.user !== null
   };
 };
 
