@@ -10,7 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from '../../store/reducers/auth';
+import * as actions from '../../store/actions/auth';
 
 const styles = {
   root: {
@@ -62,7 +62,7 @@ ButtonAppBar.propTypes = {
 
 const mapDispatchProps = dispatch => {
   return {
-    logout: () => dispatch(actions.reducer(this.props, ))
+    logout: () => dispatch(actions.logout())
   }
 }
 
