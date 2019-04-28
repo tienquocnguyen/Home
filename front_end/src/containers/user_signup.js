@@ -88,13 +88,12 @@ class RestSignup extends React.Component {
 		// 	})
 		// 	console.log(this.state.lat)
 		// 	console.log(this.state.lng)
-  			this.props.onAuth(this.state.email, this.state.password1,
-  				this.state.restaurant_name, this.state.lat, this.state.lng)
+  			this.props.onAuth(this.state.email, this.state.password1)
   			.then( res =>{
   					console.log('res here');
   					console.log(res);
 			   		alert('Singup successful! You can login now')
-			   		this.props.history.push('/login')
+			   		this.props.history.push('/user_dashboard')
 			}).catch(error => {
 				alert('Please enter correct information')
 				console.log(error)
@@ -187,8 +186,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchProps = dispatch => {
 	return {
-		onAuth: (email, password1, restaurant_name, lat, lng) => 
-		dispatch(actions.authSignupRest(email, password1, restaurant_name, lat, lng))
+		onAuth: (email, password1) => 
+		dispatch(actions.authSignupRest(email, password1))
 	}
 }
 

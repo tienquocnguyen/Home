@@ -18,7 +18,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { blue, grey } from '@material-ui/core/colors';
+
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
+import * as actions from '../store/actions/auth';
+
 
 const styles = theme => ({
     main: {
@@ -63,7 +67,9 @@ class Signup extends React.Component {
       showUserPage: false,
       showHotelPage: false,
       showSignup: false,
-      showInitial: true
+			showInitial: true,
+			email: '',
+			password1: ''
  };
 
  this.showUserPage = this.showUserPage.bind(this);
@@ -96,8 +102,7 @@ class Signup extends React.Component {
        // 	})
        // 	console.log(this.state.lat)
        // 	console.log(this.state.lng)
-             this.props.onAuth(this.state.email, this.state.password1,
-                 this.state.restaurant_name, this.state.lat, this.state.lng)
+             this.props.onAuth(this.state.email, this.state.password1)
              .then( res =>{
                      console.log('res here');
                      console.log(res);
@@ -364,4 +369,17 @@ Signup.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Signup);
+const mapStateToProps = (state) => {
+	return {
+		//loading: state.loading,
+		//error: state.error
+	}
+}
+
+const mapDispatchProps = dispatch => {
+	return {
+		onAuth: (email, password1) => dispatch(actions.authSignupRest(email, password1))
+	}
+}
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchProps)(Signup));

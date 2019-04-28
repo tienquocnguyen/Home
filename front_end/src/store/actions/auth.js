@@ -86,17 +86,13 @@ export const authLogin = (email, password, userType) => dispatch=>{
 	})
 } 
 
-export const authSignupRest = (email, password1, restaurant_name, lat, lng) => dispatch=>{
+export const authSignupRest = (email, password1) => dispatch=>{
 	//return dispatch => {
 	return new Promise(function(resolve, reject) {
 		dispatch(authStart())
-		axios.post('http://127.0.0.1:8000/api/restaurant/', {
+		axios.post('http://localhost:8000/api/bank/charge/', {
 			"email": email,
-			"password": password1,
-			"restaurant_name": restaurant_name,
-			//"address": address,
-			"rest_lat": lat,
-			"rest_long": lng
+			"password": password1
 		})
 		.then(res => {
 			/*const token = res.data.key;
@@ -105,6 +101,7 @@ export const authSignupRest = (email, password1, restaurant_name, lat, lng) => d
 			window.localStorage.setItem('expDate', expDate);
 			dispatch(authSuccess(token))
 			dispatch(checkAuthTimeout(3600));*/
+			console.log(res);
 			resolve(res);
 		})
 		.catch(error => {
