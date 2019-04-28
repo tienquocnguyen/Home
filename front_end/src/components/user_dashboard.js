@@ -16,10 +16,20 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Grid from '@material-ui/core/Grid';
+import { blue } from '@material-ui/core/colors';
 
 const styles = theme => ({
   card: {
-    maxWidth: 400,
+    width: 'auto',
+    height: 'auto',
+    display: 'block', // Fix IE 11 issue.
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: theme.spacing.unit * 8,
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
   },
   media: {
     height: 0,
@@ -39,9 +49,13 @@ const styles = theme => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: blue[500],
+  },
+  root: {
+      flexGrow: 1,
   },
 });
+
 
 class UserDashboard extends React.Component {
   state = { expanded: false };
@@ -54,11 +68,13 @@ class UserDashboard extends React.Component {
     const { classes } = this.props;
 
     return (
+    <Grid container spacing = {24}>
+    <Grid item xs>
       <Card className={classes.card}>
         <CardHeader
           avatar={
-            <Avatar aria-label="Recipe" className={classes.avatar}>
-              D
+            <Avatar aria-label="Bank" className={classes.avatar}>
+              B
             </Avatar>
           }
           action={
@@ -66,8 +82,8 @@ class UserDashboard extends React.Component {
               <MoreVertIcon />
             </IconButton>
           }
-          title="Donation Statement"
-          subheader="Wells Fargo"
+          title="Auto-Donation Bank Statement"
+          //subheader="Wells Fargo"
         />
         <CardMedia
           className={classes.media}
@@ -119,6 +135,98 @@ class UserDashboard extends React.Component {
           </CardContent>
         </Collapse> */}
       </Card>
+      </Grid>
+      <Grid item xs>
+      <Card className = {classes.card}>
+      <CardHeader
+          avatar={
+            <Avatar aria-label="Donation" className={classes.avatar}>
+              D
+            </Avatar>
+          }
+          action={
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title="Read Their Stories"
+          //subheader="Local"
+        />
+        <CardMedia
+          className={classes.media}
+          image = {require("../Homeless.jpg")}
+          title="Homeless"
+        />
+        <CardContent>
+          <Typography component="p">
+            Learn about homeless individuals and families in your area and you can help
+          </Typography>
+        </CardContent>
+        {/* <CardActions className={classes.actions} disableActionSpacing>
+        </CardActions> */}
+      </Card>
+      </Grid>
+      <Grid item xs>
+      <Card className = {classes.card}>
+      <CardHeader
+          avatar={
+            <Avatar aria-label="Map" className={classes.avatar}>
+              M
+            </Avatar>
+          }
+          action={
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title="Map of Donation Boxes"
+          //subheader="Near your current location"
+        />
+        <CardMedia
+          className={classes.media}
+          image = {require("../Donation_Box.jpg")}
+          title="Wells Fargo"
+        />
+        <CardContent>
+          <Typography component="p">
+            View donation boxes near your current location!
+          </Typography>
+        </CardContent>
+        {/* <CardActions className={classes.actions} disableActionSpacing>
+        </CardActions> */}
+      </Card>
+      </Grid>
+      <Grid item xs>
+      <Card className = {classes.card}>
+      <CardHeader
+          avatar={
+            <Avatar aria-label="Shop" className={classes.avatar}>
+              S
+            </Avatar>
+          }
+          action={
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title="Shop"
+          //subheader="Buy essential supplies for homeless care packages"
+        />
+        <CardMedia
+          className={classes.media}
+          image = {require("../CarePackage.jpg")}
+          title="Care Package"
+        />
+        <CardContent>
+          <Typography component="p">
+            Shop our online catalog of needed items including clothes, food, and personal hygiene
+          </Typography>
+        </CardContent>
+        {/* <CardActions className={classes.actions} disableActionSpacing>
+        </CardActions> */}
+      </Card>
+      </Grid>
+    </Grid>
     );
   }
 }
