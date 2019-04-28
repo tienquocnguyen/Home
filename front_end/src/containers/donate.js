@@ -89,12 +89,10 @@ export class donate extends Component {
   }
 
   render() {
-<<<<<<< HEAD
     return (
         <div>
             <h1 >Donations</h1>
             <DonatedNumber />
-=======
 
     const { classes } = this.props;
 
@@ -111,7 +109,6 @@ export class donate extends Component {
         <pre></pre>
       </Typography>
       {/* <DonatedNumber /> */}
->>>>>>> 0e7077478f74b4b8c275bbb6298da0069040c6e7
             <BankStatements bankStatements={this.state.bankStatements}/>
             <Button
           fullWidth
@@ -156,8 +153,4 @@ export class donate extends Component {
   }
 }
 
-<<<<<<< HEAD
-export default donate;
-=======
 export default withStyles(styles)(donate);
->>>>>>> 0e7077478f74b4b8c275bbb6298da0069040c6e7
