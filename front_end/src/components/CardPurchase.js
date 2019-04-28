@@ -7,7 +7,7 @@ export class CardPurchase extends Component {
     return (
         <StripeProvider apiKey="pk_test_VghJyHJS1r7oCxjuWxZZmcak00G848caUQ">
         <div className="example">
-          <h1>React Stripe Elements Example</h1>
+          <h2>Make a donation</h2>
           <Elements>
             <CheckoutForm />
           </Elements>
