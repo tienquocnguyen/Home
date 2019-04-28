@@ -48,6 +48,7 @@ class ButtonAppBar extends React.Component {
               :
               <Button color="inherit" component={Link} to="/login/">Login</Button>
             }
+            <Button color="inherit" component={Link} to= "/donate/">Donations</Button>
           </Toolbar>
         </AppBar>
         {this.props.children}
