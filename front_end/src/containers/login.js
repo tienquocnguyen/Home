@@ -38,7 +38,8 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+		padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+		backgroundColor: '#F5F7FA'
   },
   avatar: {
     margin: theme.spacing.unit,
@@ -120,7 +121,6 @@ class Login extends React.Component {
 	  			//<CircularProgress className={classes.progress} />
 
 	  			//:
-
 			    <main className={classes.main}>
 			      <CssBaseline />
 			      <Paper className={classes.paper}>
@@ -139,7 +139,7 @@ class Login extends React.Component {
 			            <InputLabel htmlFor="password">Password</InputLabel>
 			            <Input name="password" type="password" id="password" value={this.state.password} onChange={this.handleChangePassword} />
 			          </FormControl>
-			          <FormControl component="fieldset">
+			          {/* <FormControl component="fieldset">
 			        <FormLabel component="legend">User Type</FormLabel>
 			        	<RadioGroup
 				          aria-label="position"
@@ -167,7 +167,7 @@ class Login extends React.Component {
 					            labelPlacement="start"
 					         />
 			        	</RadioGroup>
-			        </FormControl>
+			        </FormControl> */}
 			          <Button
 			            type="submit"
 			            fullWidth
@@ -183,11 +183,11 @@ class Login extends React.Component {
 			            color="primary"
 			            className={classes.submit}
 			            component={Link}
-			            to='/restaurant_signup/'
+			            to='/Signup/'
 			          >
-			            User Signup
+			            Signup
 			          </Button>
-			          <Button
+			          {/* <Button
 			            fullWidth
 			            variant="contained"
 			            color="primary"
@@ -206,7 +206,7 @@ class Login extends React.Component {
 			            to='/driver_signup/'
 			          >
 			            Shelter Signup
-			          </Button>
+			          </Button> */}
 			        </form>
 			      </Paper>
 			    </main>

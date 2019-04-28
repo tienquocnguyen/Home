@@ -22,7 +22,7 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
-  },
+  }
 };
 
 class ButtonAppBar extends React.Component {
@@ -37,11 +37,17 @@ class ButtonAppBar extends React.Component {
             </Typography>
             {
               this.props.isAuthenticated ?
+              <Button color="inherit" component={Link} to="/user_dashboard"> Dashboard</Button>
+              :
+              <Button color="inherit" component={Link} to="/user_dashboard"> Dashboard </Button>
+            }
+            
+            {
+              this.props.isAuthenticated ?
               <Button color="inherit" onClick={this.props.logout} component={Link} to="/login/"> Logout</Button>
               :
               <Button color="inherit" component={Link} to="/login/">Login</Button>
             }
-            <Button color="inherit" component={Link} to= "/donate/">Donations</Button>
           </Toolbar>
         </AppBar>
         {this.props.children}
